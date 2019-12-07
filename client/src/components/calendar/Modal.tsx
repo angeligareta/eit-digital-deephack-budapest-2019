@@ -23,6 +23,10 @@ import EmailIcon from "@material-ui/icons/Email";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import AddAlertIcon from "@material-ui/icons/AddAlert";
 import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf";
+import LocalGroceryStoreIcon from "@material-ui/icons/LocalGroceryStore";
+import DeckIcon from "@material-ui/icons/Deck";
+import StoreIcon from "@material-ui/icons/Store";
+import LocalGasStationIcon from "@material-ui/icons/LocalGasStation";
 
 const useStyles = makeStyles<Theme>(theme =>
   createStyles({
@@ -40,16 +44,16 @@ const useStyles = makeStyles<Theme>(theme =>
 
 interface IModal {
   invoice: Invoice;
-  invoiceTitle: string;
   invoiceModalOpen: boolean;
   setInvoiceModalOpen: any;
+  payInvoice: () => void;
 }
 
 const InvoiceModal: React.FC<IModal> = ({
   invoice,
-  invoiceTitle,
   invoiceModalOpen,
-  setInvoiceModalOpen
+  setInvoiceModalOpen,
+  payInvoice
 }) => {
   const classes = useStyles();
 
@@ -63,9 +67,16 @@ const InvoiceModal: React.FC<IModal> = ({
   ];
 
   const getLabelIcon = (label: string) => {
+    console.log(label);
     switch (label) {
-      case "fuel":
-        return <BusinessIcon />;
+      case "Grocery":
+        return <LocalGroceryStoreIcon />;
+      case "Furniture":
+        return <DeckIcon />;
+      case "Rent":
+        return <StoreIcon />;
+      case "Car":
+        return <LocalGasStationIcon />;
       default:
         return <BusinessIcon />;
     }
@@ -114,11 +125,12 @@ const InvoiceModal: React.FC<IModal> = ({
             <ListItemAvatar>
               <Avatar
                 style={{
+                  backgroundColor: "#4e4ca0",
                   width: 35,
                   height: 35
                 }}
               >
-                {getLabelIcon(invoice.Type)}
+                {getLabelIcon(JSON.parse(invoice.InvoiceLabel)[0])}
               </Avatar>
             </ListItemAvatar>
             <ListItemText
@@ -126,7 +138,7 @@ const InvoiceModal: React.FC<IModal> = ({
                 <React.Fragment>
                   <Typography className={classes.title}>{"Type: "}</Typography>
                   <Typography className={classes.subtitle}>
-                    {invoice.Type}
+                    {JSON.parse(invoice.InvoiceLabel)[0]}
                   </Typography>
                 </React.Fragment>
               }
@@ -145,6 +157,7 @@ const InvoiceModal: React.FC<IModal> = ({
               <ListItemAvatar>
                 <Avatar
                   style={{
+                    backgroundColor: "#4e4ca0",
                     width: 35,
                     height: 35
                   }}
@@ -169,7 +182,14 @@ const InvoiceModal: React.FC<IModal> = ({
                     {index === 1 && (
                       <Grid item>
                         <Box ml={14}>
-                          <Button> Pay now! </Button>
+                          <Button
+                            onClick={() => {
+                              payInvoice();
+                              setInvoiceModalOpen(false);
+                            }}
+                          >
+                            Pay now!
+                          </Button>
                         </Box>
                       </Grid>
                     )}
@@ -191,6 +211,7 @@ const InvoiceModal: React.FC<IModal> = ({
           <ListItemAvatar>
             <Avatar
               style={{
+                backgroundColor: "#4e4ca0",
                 width: 35,
                 height: 35
               }}
@@ -210,6 +231,7 @@ const InvoiceModal: React.FC<IModal> = ({
           <ListItemAvatar>
             <Avatar
               style={{
+                backgroundColor: "#4e4ca0",
                 width: 35,
                 height: 35
               }}
@@ -220,7 +242,16 @@ const InvoiceModal: React.FC<IModal> = ({
           <ListItemText
             primary={
               <React.Fragment>
-                <Button> Open Invoice </Button>
+                <Button
+                  onClick={() =>
+                    window.open(
+                      "https://drive.google.com/file/d/10Z4MkdU0bmlLVFU1UO3CVqmkZ8I3hQ9y/view?usp=sharing",
+                      "_blank"
+                    )
+                  }
+                >
+                  Open Invoice
+                </Button>
               </React.Fragment>
             }
           />

@@ -35,11 +35,26 @@ const InvoiceCalendar: React.FC = () => {
   const classes = useStyles();
   const [invoiceModalOpen, setInvoiceModalOpen] = useState(false);
   const [invoices, setInvoices] = useState<Invoice[]>([]);
+  const [selectedInvoice, setSelectedInvoice] = useState<Invoice | undefined>(
+    undefined
+  );
+
+  const payInvoice = () => {
+    if (selectedInvoice) {
+      setInvoices(
+        invoices.map(inv => {
+          if (inv.recordid === selectedInvoice.recordid) {
+            return { ...selectedInvoice, Status: "Paid" };
+          } else {
+            return inv;
+          }
+        })
+      );
+    }
+  };
 
   const refreshInvoices = () => {
     fetchInvoices().then(invoicesResult => {
-      console.log("Receiving invoices...");
-      console.log(invoicesResult);
       setInvoices(invoicesResult);
     });
   };
@@ -68,21 +83,20 @@ const InvoiceCalendar: React.FC = () => {
               <Button
                 style={{
                   backgroundColor:
-                    invoice.Status === "Paid" ? "darkred" : "red",
-                  height: 25
+                    invoice.TransactionType === "Income" ? "red" : "green",
+                  opacity: invoice.Status === "Paid" ? 0.3 : 1,
+                  height: 25,
+                  width: "100%"
                 }}
-                onClick={() => setInvoiceModalOpen(true)}
+                onClick={() => {
+                  setSelectedInvoice(invoice);
+                  setInvoiceModalOpen(true);
+                }}
               >
                 <Typography className={classes.typography}>
                   {invoiceTitle}
                 </Typography>
               </Button>
-              <InvoiceModal
-                invoice={invoice}
-                invoiceTitle={invoiceTitle}
-                invoiceModalOpen={invoiceModalOpen}
-                setInvoiceModalOpen={setInvoiceModalOpen}
-              />
             </React.Fragment>
           );
         })}
@@ -90,13 +104,17 @@ const InvoiceCalendar: React.FC = () => {
     );
   };
 
-  const MonthCell = (value: any) => {
-    const num = getMonthData(value);
+  const MonthCell = (value: Moment) => {
+    let sum = 0;
+    invoices.forEach(invoice => {
+      sum +=
+        parseInt(invoice.DueDate.split("-")[1]) === value.month() + 1 ? 1 : 0;
+    });
 
-    return num ? (
+    return sum !== 0 ? (
       <div className="notes-month">
-        <section>{num}</section>
-        <span>Backlog number</span>
+        <span>Invoice number</span>
+        <section>{sum}</section>
       </div>
     ) : null;
   };
@@ -146,6 +164,14 @@ const InvoiceCalendar: React.FC = () => {
         <Grid item xs={12}>
           <Paper>
             <Calendar dateCellRender={DateCell} monthCellRender={MonthCell} />
+            {selectedInvoice && (
+              <InvoiceModal
+                invoice={selectedInvoice}
+                invoiceModalOpen={invoiceModalOpen}
+                setInvoiceModalOpen={setInvoiceModalOpen}
+                payInvoice={payInvoice}
+              />
+            )}
           </Paper>
         </Grid>
       </Grid>
