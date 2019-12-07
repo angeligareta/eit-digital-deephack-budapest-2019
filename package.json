@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "dev": "ts-node-dev --respawn --transpileOnly ./app/app.ts",
-    "prod": "tsc && node ./build/app.js"
+    "server": "ts-node-dev --respawn --transpileOnly ./server/app/app.ts",
+    "client": "yarn --cwd ./client start"
   },
   "repository": {
     "type": "git",
