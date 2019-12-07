@@ -1,4 +1,4 @@
-import { Invoice, formatInvoice } from "./types";
+import { Invoice, formatInvoice } from "../../shared/types";
 
 const readline = require("readline");
 const fs = require("fs");

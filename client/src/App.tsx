@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { createStyles, Theme } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
+import React from "react";
+import TopBar from "./components/TopBar";
+import { InvoiceCalendar } from "./components/calendar";
+
+const useStyles = makeStyles<Theme>(theme =>
+  createStyles({
+    root: {
+      flexGrow: 1
+    },
+    menuButton: {
+      marginRight: 2
+    },
+    title: {
+      flexGrow: 1
+    }
+  })
+);
 
 const App: React.FC = () => {
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={classes.root}>
+      <TopBar />
+      <InvoiceCalendar />
     </div>
   );
-}
+};
 
 export default App;

@@ -1,4 +1,5 @@
 export interface Invoice {
+  Type: string;
   recordId: number;
   PartyName: string;
   Currency: string;
@@ -7,6 +8,7 @@ export interface Invoice {
   PayableAmount: number;
   DueDate: string;
   FullUsername: string;
+  Status: string;
 }
 
 export function formatInvoice(invoice: Invoice) {
