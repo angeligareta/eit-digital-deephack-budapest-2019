@@ -1,4 +1,4 @@
-import { Invoice, formatInvoice } from "../../shared/types";
+import { Invoice, formatInvoice } from "../../client/src/shared/types";
 
 const readline = require("readline");
 const fs = require("fs");
@@ -7,7 +7,7 @@ const { google } = require("googleapis");
 const SCOPES = ["https://www.googleapis.com/auth/calendar"];
 const TOKEN_PATH = "./token.json";
 
-export function pushInvoice(invoice) {
+export function pushInvoice(invoice: Invoice) {
   // Load client secrets from a local file.
   fs.readFile("./credentials.json", (err, content) => {
     if (err) return console.log("Error loading client secret file:", err);

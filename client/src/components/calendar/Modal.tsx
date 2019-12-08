@@ -1,32 +1,33 @@
-import React from "react";
-import { Invoice } from "../../../../shared/types";
 import {
+  Avatar,
+  Box,
+  Divider,
+  Grid,
+  IconButton,
   List,
   ListItem,
   ListItemAvatar,
-  Avatar,
   ListItemText,
-  Typography,
   Theme,
-  Divider,
-  Box,
-  Grid,
-  IconButton
+  Typography
 } from "@material-ui/core";
-import { makeStyles, createStyles } from "@material-ui/styles";
-import PermIdentityIcon from "@material-ui/icons/PermIdentity";
-import BusinessIcon from "@material-ui/icons/Business";
-import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
-import { Modal, Button } from "antd";
-import ShareIcon from "@material-ui/icons/Share";
-import EmailIcon from "@material-ui/icons/Email";
-import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import AddAlertIcon from "@material-ui/icons/AddAlert";
-import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf";
-import LocalGroceryStoreIcon from "@material-ui/icons/LocalGroceryStore";
+import BusinessIcon from "@material-ui/icons/Business";
 import DeckIcon from "@material-ui/icons/Deck";
-import StoreIcon from "@material-ui/icons/Store";
+import EmailIcon from "@material-ui/icons/Email";
+import EventIcon from "@material-ui/icons/Event";
 import LocalGasStationIcon from "@material-ui/icons/LocalGasStation";
+import LocalGroceryStoreIcon from "@material-ui/icons/LocalGroceryStore";
+import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
+import PermIdentityIcon from "@material-ui/icons/PermIdentity";
+import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf";
+import StoreIcon from "@material-ui/icons/Store";
+import WhatsAppIcon from "@material-ui/icons/WhatsApp";
+import { createStyles, makeStyles } from "@material-ui/styles";
+import { Button, Modal } from "antd";
+import React from "react";
+import { Invoice } from "../../shared/types";
+import { addGoogleEvent } from "../../utils";
 
 const useStyles = makeStyles<Theme>(theme =>
   createStyles({
@@ -207,26 +208,59 @@ const InvoiceModal: React.FC<IModal> = ({
             </div>
           </Box>
         </List>
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar
-              style={{
-                backgroundColor: "#4e4ca0",
-                width: 35,
-                height: 35
-              }}
-            >
-              <AddAlertIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText
-            primary={
-              <React.Fragment>
-                <Button> Remind me </Button>
-              </React.Fragment>
-            }
-          />
-        </ListItem>
+        <Grid container>
+          <Grid item>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar
+                  style={{
+                    backgroundColor: "#4e4ca0",
+                    width: 35,
+                    height: 35
+                  }}
+                >
+                  <AddAlertIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                primary={
+                  <React.Fragment>
+                    <Button> Remind me </Button>
+                  </React.Fragment>
+                }
+              />
+            </ListItem>
+          </Grid>
+          <Grid item>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar
+                  style={{
+                    backgroundColor: "#4e4ca0",
+                    width: 35,
+                    height: 35
+                  }}
+                >
+                  <EventIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                primary={
+                  <React.Fragment>
+                    <Button
+                      onClick={() => {
+                        addGoogleEvent(invoice);
+                        setInvoiceModalOpen(false);
+                      }}
+                    >
+                      Google Sync
+                    </Button>
+                  </React.Fragment>
+                }
+              />
+            </ListItem>
+          </Grid>
+        </Grid>
         <ListItem>
           <ListItemAvatar>
             <Avatar

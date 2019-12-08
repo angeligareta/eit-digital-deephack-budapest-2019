@@ -13,10 +13,10 @@ import { makeStyles } from "@material-ui/styles";
 import { Button, Calendar } from "antd";
 import { Moment } from "moment";
 import React, { useEffect, useState } from "react";
-import { Invoice } from "../../../../shared/types";
+import { Invoice } from "../../shared/types";
 // IMPORT ANTD CSS
 import "../../styles/calendar.css";
-import { fetchInvoices, getMonthData } from "../../utils/index";
+import { fetchInvoices } from "../../utils/index";
 import InvoiceModal from "./Modal";
 
 const useStyles = makeStyles<Theme>(theme =>
@@ -83,7 +83,9 @@ const InvoiceCalendar: React.FC = () => {
               <Button
                 style={{
                   backgroundColor:
-                    invoice.TransactionType === "Income" ? "red" : "green",
+                    invoice.TransactionType === "Income"
+                      ? "#f44336"
+                      : "#4caf50",
                   opacity: invoice.Status === "Paid" ? 0.3 : 1,
                   height: 25,
                   width: "100%"
