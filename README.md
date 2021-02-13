@@ -3,8 +3,6 @@
 
 <p align="center">
   <img alt="DeepHack" src="https://img.shields.io/badge/EIT%20Digital-DeepHack-red?style=flat-square" />  
-  <img alt="License" src="https://img.shields.io/github/license/angeligareta/EITBudapestHack2019?style=flat-square" />
-  <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/angeligareta/EITBudapestHack2019?style=flat-square" />
 </p>
 
 Hackathon organized by [Ultrahack](https://ultrahack.org/budapesthack2019) and [OTP](https://www.otpbank.hu/portal/hu/Maganszemelyek) with the aim of finding solutions for the shortcomings of the current financial management processes of SMEs. 
