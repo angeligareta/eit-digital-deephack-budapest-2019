@@ -5,7 +5,7 @@
   <img alt="DeepHack" src="https://img.shields.io/badge/EIT%20Digital-DeepHack-red?style=flat-square" />  
 </p>
 
-Hackathon organized by [Ultrahack](https://ultrahack.org/budapesthack2019) and [OTP](https://www.otpbank.hu/portal/hu/Maganszemelyek) with the aim of finding solutions for the shortcomings of the current financial management processes of SMEs. 
+Two-day hackathon organized by [Ultrahack](https://ultrahack.org/budapesthack2019) and [OTP](https://www.otpbank.hu/portal/hu/Maganszemelyek) with the aim of finding solutions for the shortcomings of the current financial management processes of SMEs. 
 
 ## 🤔 Problem statement
 SMEs spend a too much time on finance administration which is time away from their core business processes – such as sales and production. There are numerous banking and administration (accounting, invoicing, CRM etc.) solutions in the market, but operating mostly on stand alone basis. OTP eBIZ has developed a scalable platform with open APIs that allows third party players to improve and extend the functionality and therefore improve the value for SMEs. The functionalities it covers are money transfer, invoice management (issuing, registering, paying), basic financial dashboard, data export for accounting, lending and factoring. Come up with concept, demos and solutions which address the shortcomings of today’s SME finance management processes. Ideate and trial how your solution can be integrated with OTP eBIZ platform using their API.
@@ -16,6 +16,12 @@ SMEs spend a too much time on finance administration which is time away from the
 ## 💡 Solution
 
 Our solution consisted of the development of a plugin for the eBiz OTP platform that reminds users of the payment of invoices and optimizes the task itself, resulting in a better credit score for customers. It achieved 2nd place in the hackathon! 🥇
+
+Payment of invoices
+![Demo 1](demo/demo-1.gif)
+
+Synchronization of invoices with Google Calendar
+![Demo 2](demo/demo-2.gif)
 
 ## Authors
 - Xiaohu Shu 
